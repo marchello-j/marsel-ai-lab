@@ -71,6 +71,31 @@ const techStack = [
 
 const workflow = ["Research", "Plan", "Design", "Build", "Automate", "Deploy"];
 
+const caseWorkflowSteps = [
+  "Telegram Trigger receives a message",
+  "n8n loads recent chat history from PostgreSQL",
+  "OpenRouter generates a contextual AI reply",
+  "n8n sends the response back to Telegram",
+  "PostgreSQL saves the new conversation messages"
+];
+
+const caseTechStack = [
+  "Telegram Bot API",
+  "n8n",
+  "PostgreSQL",
+  "OpenRouter",
+  "Docker",
+  "Railway"
+];
+
+const architectureFlow = [
+  "Telegram",
+  "n8n",
+  "PostgreSQL",
+  "OpenRouter",
+  "Telegram"
+];
+
 export default function Home() {
   return (
     <main
@@ -83,6 +108,7 @@ export default function Home() {
       <About />
       <Services />
       <Projects />
+      <FeaturedCaseStudy />
       <TechStack />
       <Workflow />
       <Contact />
@@ -273,6 +299,71 @@ function Projects() {
             </div>
           </article>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function FeaturedCaseStudy() {
+  return (
+    <section id="case-study" className="section-shell">
+      <div className="case-study-panel">
+        <div className="case-study-header">
+          <div>
+            <p className="section-kicker">Featured Case Study</p>
+            <h2 className="section-title">Telegram AI Bot with Memory</h2>
+          </div>
+          <span className="case-status">Working prototype</span>
+        </div>
+
+        <div className="case-flow" aria-label="Architecture flow">
+          {architectureFlow.map((item, index) => (
+            <div key={`${item}-${index}`} className="case-flow-item">
+              <span>{item}</span>
+              {index < architectureFlow.length - 1 ? (
+                <strong aria-hidden="true">→</strong>
+              ) : null}
+            </div>
+          ))}
+        </div>
+
+        <div className="case-study-grid">
+          <article className="case-copy-card">
+            <span>Problem</span>
+            <p>
+              Most simple AI bots forget previous messages and respond without
+              context.
+            </p>
+          </article>
+          <article className="case-copy-card case-copy-card-strong">
+            <span>Solution</span>
+            <p>
+              This workflow connects Telegram, n8n, PostgreSQL, and OpenRouter.
+              It loads recent chat history before generating a reply, then saves
+              both user and assistant messages back to the database.
+            </p>
+          </article>
+        </div>
+
+        <div className="case-study-details">
+          <div className="case-workflow-card">
+            <h3>Workflow</h3>
+            <ol>
+              {caseWorkflowSteps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="case-stack-card">
+            <h3>Tech stack</h3>
+            <div>
+              {caseTechStack.map((tech) => (
+                <span key={tech}>{tech}</span>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

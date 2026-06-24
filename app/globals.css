@@ -350,6 +350,163 @@ a {
   height: 3.1rem;
 }
 
+.case-study-panel {
+  overflow: hidden;
+  border: 1px solid var(--accent-soft);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(65, 245, 215, 0.14), transparent 30%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025));
+  box-shadow: 0 32px 110px rgba(0, 0, 0, 0.34);
+  padding: 1.25rem;
+}
+
+.case-study-header {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1rem;
+}
+
+.case-status {
+  width: fit-content;
+  border: 1px solid var(--accent-soft);
+  border-radius: 999px;
+  background: rgba(65, 245, 215, 0.1);
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 900;
+  padding: 0.55rem 0.85rem;
+}
+
+.case-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(135deg, rgba(5, 12, 11, 0.86), rgba(5, 12, 11, 0.48)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 0 1px,
+      transparent 1px 22px
+    );
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.case-flow-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.case-flow-item span {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.055);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 0.58rem 0.8rem;
+}
+
+.case-flow-item strong {
+  color: var(--accent);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.case-study-grid,
+.case-study-details {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.case-copy-card,
+.case-workflow-card,
+.case-stack-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  background: rgba(5, 12, 11, 0.48);
+  padding: 1.35rem;
+}
+
+.case-copy-card-strong {
+  background: rgba(65, 245, 215, 0.055);
+}
+
+.case-copy-card span {
+  display: block;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 900;
+  margin-bottom: 0.8rem;
+}
+
+.case-copy-card p {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.case-workflow-card h3,
+.case-stack-card h3 {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+.case-workflow-card ol {
+  display: grid;
+  gap: 0.75rem;
+  counter-reset: case-step;
+  list-style: none;
+}
+
+.case-workflow-card li {
+  counter-increment: case-step;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: start;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.55;
+}
+
+.case-workflow-card li::before {
+  content: counter(case-step);
+  display: grid;
+  width: 1.75rem;
+  height: 1.75rem;
+  place-items: center;
+  border: 1px solid var(--accent-soft);
+  border-radius: 999px;
+  background: rgba(65, 245, 215, 0.08);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.case-stack-card div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.case-stack-card span {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 0.62rem 0.85rem;
+}
+
 .contact-link {
   display: flex;
   align-items: center;
@@ -420,9 +577,49 @@ a {
     opacity: 0.42;
   }
 
+  .case-study-panel {
+    border-radius: 1.5rem;
+    padding: 0.75rem;
+  }
+
+  .case-flow {
+    display: grid;
+  }
+
+  .case-flow-item {
+    justify-content: space-between;
+  }
+
+  .case-flow-item span {
+    flex: 1;
+    text-align: center;
+  }
+
   .contact-link {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+@media (min-width: 768px) {
+  .case-study-header {
+    grid-template-columns: 1fr auto;
+    padding: 1.5rem;
+  }
+
+  .case-flow,
+  .case-study-grid,
+  .case-study-details {
+    margin-inline: 1.5rem;
+  }
+
+  .case-study-grid {
+    grid-template-columns: 0.78fr 1.22fr;
+  }
+
+  .case-study-details {
+    grid-template-columns: 1.12fr 0.88fr;
+    padding-bottom: 1.5rem;
   }
 }
 
