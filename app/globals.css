@@ -220,6 +220,12 @@ a {
     background 220ms ease;
 }
 
+.project-card {
+  display: flex;
+  min-height: 29rem;
+  flex-direction: column;
+}
+
 .feature-card:hover,
 .project-card:hover,
 .workflow-step:hover {
@@ -230,6 +236,24 @@ a {
 
 .workflow-step {
   min-height: 9.5rem;
+}
+
+.project-description {
+  min-height: 5.25rem;
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.75;
+}
+
+.project-tags {
+  display: flex;
+  min-height: 4.75rem;
+  align-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
 }
 
 .project-visual {

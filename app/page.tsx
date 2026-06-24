@@ -263,8 +263,8 @@ function Projects() {
               <span />
             </div>
             <h3 className="text-xl font-bold text-white">{project.title}</h3>
-            <p className="mt-4 leading-7 text-white/62">{project.description}</p>
-            <div className="mt-6 flex flex-wrap gap-2">
+            <p className="project-description">{project.description}</p>
+            <div className="project-tags">
               {project.stack.map((item) => (
                 <span key={item} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/68">
                   {item}
