@@ -291,11 +291,29 @@ const translations = {
 } as const;
 
 type Language = keyof typeof translations;
+type ThemePreference = "system" | "light" | "dark";
 type Translation = (typeof translations)[Language];
 type ProjectVisual = "bot" | "research" | "landing";
 
+function applyThemePreference(theme: ThemePreference) {
+  const root = document.documentElement;
+
+  if (theme === "system") {
+    delete root.dataset.theme;
+    root.style.colorScheme = window.matchMedia("(prefers-color-scheme: dark)")
+      .matches
+      ? "dark"
+      : "light";
+    return;
+  }
+
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme;
+}
+
 export function HomeClient() {
   const [language, setLanguage] = useState<Language>("en");
+  const [theme, setTheme] = useState<ThemePreference>("system");
 
   useEffect(() => {
     const storedLanguage = window.localStorage.getItem("marsel-ai-lab-language");
@@ -307,9 +325,47 @@ export function HomeClient() {
     }
   }, []);
 
+  useEffect(() => {
+    const storedTheme = window.localStorage.getItem("marsel-ai-lab-theme");
+
+    if (storedTheme === "light" || storedTheme === "dark" || storedTheme === "system") {
+      window.requestAnimationFrame(() => {
+        setTheme(storedTheme);
+        applyThemePreference(storedTheme);
+      });
+      return;
+    }
+
+    applyThemePreference("system");
+  }, []);
+
+  useEffect(() => {
+    if (theme !== "system") {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const syncSystemTheme = () => {
+      applyThemePreference("system");
+    };
+
+    syncSystemTheme();
+    mediaQuery.addEventListener("change", syncSystemTheme);
+
+    return () => {
+      mediaQuery.removeEventListener("change", syncSystemTheme);
+    };
+  }, [theme]);
+
   const changeLanguage = (nextLanguage: Language) => {
     setLanguage(nextLanguage);
     window.localStorage.setItem("marsel-ai-lab-language", nextLanguage);
+  };
+
+  const changeTheme = (nextTheme: ThemePreference) => {
+    setTheme(nextTheme);
+    window.localStorage.setItem("marsel-ai-lab-theme", nextTheme);
+    applyThemePreference(nextTheme);
   };
 
   const t = translations[language];
@@ -322,7 +378,9 @@ export function HomeClient() {
       <div className="site-ambient" />
       <Header
         language={language}
+        theme={theme}
         onLanguageChange={changeLanguage}
+        onThemeChange={changeTheme}
         t={t}
       />
       <Hero t={t} />
@@ -341,15 +399,19 @@ export function HomeClient() {
 
 function Header({
   language,
+  theme,
   onLanguageChange,
+  onThemeChange,
   t
 }: {
   language: Language;
+  theme: ThemePreference;
   onLanguageChange: (language: Language) => void;
+  onThemeChange: (theme: ThemePreference) => void;
   t: Translation;
 }) {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050706]/85 backdrop-blur-xl">
+    <header className="site-header sticky top-0 z-50 border-b border-white/10 bg-[#050706]/85 backdrop-blur-xl">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
         <a href="#" className="group flex min-w-0 items-center gap-3" aria-label="Marsel AI Lab home">
           <span className="grid size-9 shrink-0 place-items-center rounded-xl border border-[var(--accent-soft)] bg-[var(--accent)]/12 text-sm font-black text-[var(--accent)] transition group-hover:scale-105">
@@ -378,6 +440,7 @@ function Header({
             label={t.languageSwitcherLabel}
             onLanguageChange={onLanguageChange}
           />
+          <ThemeSwitcher currentTheme={theme} onThemeChange={onThemeChange} />
           <a
             href="#contact"
             className="rounded-full border border-white/14 px-3 py-2 text-sm font-semibold text-white transition hover:border-[var(--accent-soft)] hover:bg-[var(--accent)]/10 sm:px-4"
@@ -387,6 +450,29 @@ function Header({
         </div>
       </nav>
     </header>
+  );
+}
+
+function ThemeSwitcher({
+  currentTheme,
+  onThemeChange
+}: {
+  currentTheme: ThemePreference;
+  onThemeChange: (theme: ThemePreference) => void;
+}) {
+  return (
+    <label className="theme-switcher">
+      <span>Theme</span>
+      <select
+        aria-label="Theme"
+        value={currentTheme}
+        onChange={(event) => onThemeChange(event.target.value as ThemePreference)}
+      >
+        <option value="system">System</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </label>
   );
 }
 

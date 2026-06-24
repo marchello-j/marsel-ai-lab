@@ -1,6 +1,60 @@
 @import "tailwindcss";
 
 :root {
+  --background: #f5fbf9;
+  --foreground: #071311;
+  --accent: #047d6f;
+  --accent-strong: #069b89;
+  --accent-soft: rgba(4, 125, 111, 0.28);
+  --surface: rgba(4, 18, 16, 0.045);
+  --surface-strong: rgba(4, 18, 16, 0.075);
+  --border: rgba(4, 18, 16, 0.12);
+  --muted: rgba(7, 19, 17, 0.68);
+  --muted-soft: rgba(7, 19, 17, 0.54);
+  --panel-bg: rgba(255, 255, 255, 0.74);
+  --panel-strong: rgba(255, 255, 255, 0.88);
+  --panel-dark: rgba(255, 255, 255, 0.64);
+  --header-bg: rgba(245, 251, 249, 0.88);
+  --ambient-bg:
+    radial-gradient(circle at 18% 12%, rgba(4, 125, 111, 0.13), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(110, 92, 255, 0.08), transparent 28%),
+    radial-gradient(circle at 60% 78%, rgba(4, 125, 111, 0.08), transparent 30%),
+    linear-gradient(180deg, #f5fbf9 0%, #edf7f4 52%, #f7fbfa 100%);
+  --grid-line-a: rgba(4, 18, 16, 0.06);
+  --grid-line-b: rgba(4, 18, 16, 0.04);
+  --shadow: rgba(4, 18, 16, 0.13);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --background: #050706;
+    --foreground: #f5fffd;
+    --accent: #41f5d7;
+    --accent-strong: #6cffeb;
+    --accent-soft: rgba(65, 245, 215, 0.28);
+    --surface: rgba(255, 255, 255, 0.055);
+    --surface-strong: rgba(255, 255, 255, 0.085);
+    --border: rgba(255, 255, 255, 0.1);
+    --muted: rgba(255, 255, 255, 0.68);
+    --muted-soft: rgba(255, 255, 255, 0.54);
+    --panel-bg: rgba(5, 12, 11, 0.48);
+    --panel-strong: rgba(255, 255, 255, 0.055);
+    --panel-dark: rgba(5, 12, 11, 0.86);
+    --header-bg: rgba(5, 7, 6, 0.85);
+    --ambient-bg:
+      radial-gradient(circle at 18% 12%, rgba(65, 245, 215, 0.18), transparent 28%),
+      radial-gradient(circle at 82% 18%, rgba(110, 92, 255, 0.12), transparent 28%),
+      radial-gradient(circle at 60% 78%, rgba(65, 245, 215, 0.08), transparent 30%),
+      linear-gradient(180deg, #07100f 0%, #050706 52%, #080d0c 100%);
+    --grid-line-a: rgba(255, 255, 255, 0.035);
+    --grid-line-b: rgba(255, 255, 255, 0.026);
+    --shadow: rgba(0, 0, 0, 0.32);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
   --background: #050706;
   --foreground: #f5fffd;
   --accent: #41f5d7;
@@ -8,6 +62,26 @@
   --accent-soft: rgba(65, 245, 215, 0.28);
   --surface: rgba(255, 255, 255, 0.055);
   --surface-strong: rgba(255, 255, 255, 0.085);
+  --border: rgba(255, 255, 255, 0.1);
+  --muted: rgba(255, 255, 255, 0.68);
+  --muted-soft: rgba(255, 255, 255, 0.54);
+  --panel-bg: rgba(5, 12, 11, 0.48);
+  --panel-strong: rgba(255, 255, 255, 0.055);
+  --panel-dark: rgba(5, 12, 11, 0.86);
+  --header-bg: rgba(5, 7, 6, 0.85);
+  --ambient-bg:
+    radial-gradient(circle at 18% 12%, rgba(65, 245, 215, 0.18), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(110, 92, 255, 0.12), transparent 28%),
+    radial-gradient(circle at 60% 78%, rgba(65, 245, 215, 0.08), transparent 30%),
+    linear-gradient(180deg, #07100f 0%, #050706 52%, #080d0c 100%);
+  --grid-line-a: rgba(255, 255, 255, 0.035);
+  --grid-line-b: rgba(255, 255, 255, 0.026);
+  --shadow: rgba(0, 0, 0, 0.32);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
 }
 
 * {
@@ -47,11 +121,7 @@ a {
   position: fixed;
   inset: 0;
   z-index: -10;
-  background:
-    radial-gradient(circle at 18% 12%, rgba(65, 245, 215, 0.18), transparent 28%),
-    radial-gradient(circle at 82% 18%, rgba(110, 92, 255, 0.12), transparent 28%),
-    radial-gradient(circle at 60% 78%, rgba(65, 245, 215, 0.08), transparent 30%),
-    linear-gradient(180deg, #07100f 0%, #050706 52%, #080d0c 100%);
+  background: var(--ambient-bg);
 }
 
 .site-ambient::after {
@@ -59,8 +129,8 @@ a {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+    linear-gradient(var(--grid-line-a) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line-b) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.86), transparent 78%);
 }
@@ -99,7 +169,7 @@ a {
 .section-title {
   max-width: 48rem;
   text-wrap: balance;
-  color: white;
+  color: var(--foreground);
   font-size: clamp(2rem, 5vw, 4.25rem);
   font-weight: 900;
   letter-spacing: -0.035em;
@@ -114,7 +184,12 @@ a {
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: var(--surface);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
+  box-shadow: 0 24px 80px var(--shadow);
+}
+
+.site-header {
+  background: var(--header-bg) !important;
+  border-color: var(--border) !important;
 }
 
 .lab-panel {
@@ -247,6 +322,39 @@ a {
 .language-switcher button.is-active {
   background: var(--accent);
   color: #031211;
+}
+
+.theme-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted-soft);
+  font-size: 0.75rem;
+  font-weight: 900;
+  padding: 0.18rem 0.28rem 0.18rem 0.7rem;
+}
+
+.theme-switcher select {
+  max-width: 5.7rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--panel-strong);
+  color: var(--foreground);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 900;
+  outline: none;
+  padding: 0.5rem 0.55rem;
+}
+
+.theme-switcher select:focus-visible,
+.language-switcher button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .feature-card,
@@ -468,9 +576,9 @@ a {
 .case-copy-card,
 .case-workflow-card,
 .case-stack-card {
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
   border-radius: 1.5rem;
-  background: rgba(5, 12, 11, 0.48);
+  background: var(--panel-bg);
   padding: 1.35rem;
 }
 
@@ -575,8 +683,114 @@ a {
 }
 
 .contact-link strong {
-  color: white;
+  color: var(--foreground);
   font-size: 0.95rem;
+}
+
+.back-to-top {
+  background: var(--header-bg);
+  color: var(--foreground);
+}
+
+.back-to-top:hover {
+  background: var(--accent);
+  color: #031211;
+}
+
+:root[data-theme="light"] .text-white,
+:root[data-theme="light"] [class*="text-white/"] {
+  color: var(--foreground) !important;
+}
+
+:root[data-theme="light"] [class*="text-white/"],
+:root[data-theme="light"] .project-description,
+:root[data-theme="light"] .case-copy-card p,
+:root[data-theme="light"] .case-workflow-card li,
+:root[data-theme="light"] .contact-link span,
+:root[data-theme="light"] footer {
+  color: var(--muted) !important;
+}
+
+:root[data-theme="light"] [class*="border-white/"],
+:root[data-theme="light"] [class*="ring-white/"] {
+  border-color: var(--border) !important;
+  --tw-ring-color: var(--border) !important;
+}
+
+:root[data-theme="light"] [class*="bg-white/"] {
+  background-color: var(--surface) !important;
+}
+
+:root[data-theme="light"] .lab-panel,
+:root[data-theme="light"] .feature-card,
+:root[data-theme="light"] .project-card,
+:root[data-theme="light"] .workflow-step,
+:root[data-theme="light"] .contact-link {
+  background: var(--panel-bg);
+}
+
+:root[data-theme="light"] .case-flow,
+:root[data-theme="light"] .project-visual {
+  background:
+    linear-gradient(135deg, rgba(4, 125, 111, 0.1), rgba(255, 255, 255, 0.76)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(4, 18, 16, 0.06) 0 1px,
+      transparent 1px 22px
+    );
+}
+
+:root[data-theme="light"] .project-visual span {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .text-white,
+  :root:not([data-theme]) [class*="text-white/"] {
+    color: var(--foreground) !important;
+  }
+
+  :root:not([data-theme]) [class*="text-white/"],
+  :root:not([data-theme]) .project-description,
+  :root:not([data-theme]) .case-copy-card p,
+  :root:not([data-theme]) .case-workflow-card li,
+  :root:not([data-theme]) .contact-link span,
+  :root:not([data-theme]) footer {
+    color: var(--muted) !important;
+  }
+
+  :root:not([data-theme]) [class*="border-white/"],
+  :root:not([data-theme]) [class*="ring-white/"] {
+    border-color: var(--border) !important;
+    --tw-ring-color: var(--border) !important;
+  }
+
+  :root:not([data-theme]) [class*="bg-white/"] {
+    background-color: var(--surface) !important;
+  }
+
+  :root:not([data-theme]) .lab-panel,
+  :root:not([data-theme]) .feature-card,
+  :root:not([data-theme]) .project-card,
+  :root:not([data-theme]) .workflow-step,
+  :root:not([data-theme]) .contact-link {
+    background: var(--panel-bg);
+  }
+
+  :root:not([data-theme]) .case-flow,
+  :root:not([data-theme]) .project-visual {
+    background:
+      linear-gradient(135deg, rgba(4, 125, 111, 0.1), rgba(255, 255, 255, 0.76)),
+      repeating-linear-gradient(
+        90deg,
+        rgba(4, 18, 16, 0.06) 0 1px,
+        transparent 1px 22px
+      );
+  }
+
+  :root:not([data-theme]) .project-visual span {
+    background: rgba(255, 255, 255, 0.82);
+  }
 }
 
 .animate-rise,
@@ -615,6 +829,18 @@ a {
   .hero-visual {
     inset: auto -7rem 10rem auto;
     opacity: 0.42;
+  }
+
+  .theme-switcher {
+    padding-left: 0.28rem;
+  }
+
+  .theme-switcher span {
+    display: none;
+  }
+
+  .theme-switcher select {
+    max-width: 5.25rem;
   }
 
   .case-study-panel {
