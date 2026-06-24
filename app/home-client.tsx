@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BackToTop } from "./back-to-top";
 
 const techStack = [
@@ -460,19 +460,40 @@ function ThemeSwitcher({
   currentTheme: ThemePreference;
   onThemeChange: (theme: ThemePreference) => void;
 }) {
+  const switcherRef = useRef<HTMLDetailsElement>(null);
+  const themeLabels: Record<ThemePreference, string> = {
+    system: "System",
+    light: "Light",
+    dark: "Dark"
+  };
+  const themes: ThemePreference[] = ["system", "light", "dark"];
+
+  const selectTheme = (theme: ThemePreference) => {
+    onThemeChange(theme);
+    switcherRef.current?.removeAttribute("open");
+  };
+
   return (
-    <label className="theme-switcher">
-      <span>Theme</span>
-      <select
-        aria-label="Theme"
-        value={currentTheme}
-        onChange={(event) => onThemeChange(event.target.value as ThemePreference)}
-      >
-        <option value="system">System</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
-    </label>
+    <details ref={switcherRef} className="theme-switcher">
+      <summary aria-label="Theme">
+        <span>Theme</span>
+        <strong>{themeLabels[currentTheme]}</strong>
+      </summary>
+      <div className="theme-menu" role="menu" aria-label="Theme options">
+        {themes.map((theme) => (
+          <button
+            key={theme}
+            type="button"
+            role="menuitemradio"
+            aria-checked={currentTheme === theme}
+            className={currentTheme === theme ? "is-active" : ""}
+            onClick={() => selectTheme(theme)}
+          >
+            {themeLabels[theme]}
+          </button>
+        ))}
+      </div>
+    </details>
   );
 }
 
@@ -518,7 +539,7 @@ function Hero({ t }: { t: Translation }) {
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <a
             href="#projects"
-            className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-bold text-[#031211] transition hover:-translate-y-0.5 hover:bg-[var(--accent-strong)] active:translate-y-0"
+            className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-bold text-[#211006] transition hover:-translate-y-0.5 hover:bg-[var(--accent-strong)] active:translate-y-0"
           >
             {t.hero.primaryCta}
           </a>
@@ -560,7 +581,7 @@ function Hero({ t }: { t: Translation }) {
                 className="automation-row"
                 style={{ "--delay": `${index * 110}ms` } as CSSProperties}
               >
-                <span className="size-2 rounded-full bg-[var(--accent)] shadow-[0_0_18px_rgba(65,245,215,0.72)]" />
+                <span className="size-2 rounded-full bg-[var(--accent)] shadow-[0_0_18px_rgba(255,155,92,0.62)]" />
                 <span className="font-semibold text-white/88">{label}</span>
                 <span className="ml-auto text-sm text-white/45">0{index + 1}</span>
               </div>
@@ -572,7 +593,7 @@ function Hero({ t }: { t: Translation }) {
               <span className="font-semibold text-[var(--accent)]">Next + AI + n8n</span>
             </div>
             <div className="h-2 overflow-hidden rounded-full bg-white/8">
-              <div className="h-full w-[78%] rounded-full bg-[linear-gradient(90deg,var(--accent),#9f8cff)]" />
+              <div className="h-full w-[78%] rounded-full bg-[linear-gradient(90deg,var(--accent),#45725d)]" />
             </div>
           </div>
         </div>
@@ -747,7 +768,7 @@ function Workflow({ t }: { t: Translation }) {
 function Contact({ t }: { t: Translation }) {
   return (
     <section id="contact" className="section-shell pb-20">
-      <div className="grid gap-8 rounded-[2rem] border border-[var(--accent-soft)] bg-[linear-gradient(135deg,rgba(65,245,215,0.14),rgba(255,255,255,0.04))] p-6 sm:p-8 lg:grid-cols-[1fr_0.8fr] lg:p-10">
+      <div className="grid gap-8 rounded-[2rem] border border-[var(--accent-soft)] bg-[linear-gradient(135deg,rgba(255,155,92,0.14),rgba(255,255,255,0.04))] p-6 sm:p-8 lg:grid-cols-[1fr_0.8fr] lg:p-10">
         <div>
           <p className="section-kicker">{t.contact.kicker}</p>
           <h2 className="section-title">{t.contact.title}</h2>
