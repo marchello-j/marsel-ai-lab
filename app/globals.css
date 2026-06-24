@@ -209,6 +209,46 @@ a {
   text-align: center;
 }
 
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  padding: 0.18rem;
+}
+
+.language-switcher button {
+  min-width: 2.15rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.58);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 900;
+  line-height: 1;
+  padding: 0.5rem 0.55rem;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.language-switcher button:hover {
+  color: white;
+}
+
+.language-switcher button:active {
+  transform: scale(0.97);
+}
+
+.language-switcher button.is-active {
+  background: var(--accent);
+  color: #031211;
+}
+
 .feature-card,
 .project-card,
 .workflow-step {
