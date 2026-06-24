@@ -282,46 +282,47 @@ a {
 }
 
 .project-visual-bot span {
-  width: 54%;
-  height: 1.8rem;
+  height: 1.45rem;
   border-radius: 999px;
 }
 
 .project-visual-bot span:nth-child(1) {
-  top: 1.2rem;
-  left: 1.2rem;
+  top: 1.25rem;
+  left: 1.5rem;
+  right: 1.5rem;
 }
 
 .project-visual-bot span:nth-child(2) {
-  top: 3.05rem;
-  right: 1.2rem;
+  top: 3.15rem;
+  left: 1.5rem;
+  width: 48%;
 }
 
 .project-visual-bot span:nth-child(3) {
-  right: 2.2rem;
-  bottom: 0.9rem;
-  width: 34%;
+  top: 3.15rem;
+  right: 1.5rem;
+  width: 36%;
 }
 
 .project-visual-research span {
-  bottom: 1.2rem;
-  width: 16%;
-  border-radius: 0.8rem 0.8rem 0 0;
+  bottom: 1.4rem;
+  width: 18%;
+  border-radius: 0.8rem 0.8rem 0.25rem 0.25rem;
 }
 
 .project-visual-research span:nth-child(1) {
-  left: 24%;
-  height: 2.2rem;
+  left: 21%;
+  height: 2.5rem;
 }
 
 .project-visual-research span:nth-child(2) {
-  left: 43%;
-  height: 3.6rem;
+  left: 41%;
+  height: 3.8rem;
 }
 
 .project-visual-research span:nth-child(3) {
-  left: 62%;
-  height: 2.9rem;
+  left: 61%;
+  height: 2.5rem;
 }
 
 .project-visual-landing span {
