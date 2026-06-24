@@ -330,14 +330,10 @@ function Contact() {
           </p>
         </div>
         <div className="grid content-end gap-3">
-          <a className="contact-link" href="mailto:contact@example.com">
-            <span>Email</span>
-            <strong>contact@example.com</strong>
-          </a>
-          <a className="contact-link" href="https://t.me/your_username">
-            <span>Telegram</span>
-            <strong>@your_username</strong>
-          </a>
+          <div className="contact-link">
+            <span>Availability</span>
+            <strong>Contact links will be added soon.</strong>
+          </div>
         </div>
       </div>
     </section>
