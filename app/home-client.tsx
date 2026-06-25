@@ -326,6 +326,10 @@ export function HomeClient() {
   }, []);
 
   useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+
+  useEffect(() => {
     const storedTheme = window.localStorage.getItem("marsel-ai-lab-theme");
 
     if (storedTheme === "light" || storedTheme === "dark" || storedTheme === "system") {
@@ -468,6 +472,32 @@ function ThemeSwitcher({
   };
   const themes: ThemePreference[] = ["system", "light", "dark"];
 
+  useEffect(() => {
+    const closeMenu = () => {
+      switcherRef.current?.removeAttribute("open");
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!switcherRef.current?.contains(event.target as Node)) {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, []);
+
   const selectTheme = (theme: ThemePreference) => {
     onThemeChange(theme);
     switcherRef.current?.removeAttribute("open");
@@ -539,7 +569,7 @@ function Hero({ t }: { t: Translation }) {
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <a
             href="#projects"
-            className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-bold text-[#211006] transition hover:-translate-y-0.5 hover:bg-[var(--accent-strong)] active:translate-y-0"
+            className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-bold text-[var(--accent-contrast)] transition hover:-translate-y-0.5 hover:bg-[var(--accent-strong)] active:translate-y-0"
           >
             {t.hero.primaryCta}
           </a>

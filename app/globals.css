@@ -3,9 +3,10 @@
 :root {
   --background: #f8f3ea;
   --foreground: #19130d;
-  --accent: #b85f2d;
-  --accent-strong: #d87538;
-  --accent-soft: rgba(184, 95, 45, 0.28);
+  --accent: #a64d21;
+  --accent-strong: #ba5c2a;
+  --accent-contrast: #fff8ef;
+  --accent-soft: rgba(166, 77, 33, 0.3);
   --surface: rgba(68, 45, 26, 0.055);
   --surface-strong: rgba(68, 45, 26, 0.09);
   --border: rgba(68, 45, 26, 0.14);
@@ -32,6 +33,7 @@
     --foreground: #fff8ef;
     --accent: #ff9b5c;
     --accent-strong: #ffb27d;
+    --accent-contrast: #211006;
     --accent-soft: rgba(255, 155, 92, 0.28);
     --surface: rgba(255, 255, 255, 0.055);
     --surface-strong: rgba(255, 255, 255, 0.085);
@@ -59,6 +61,7 @@
   --foreground: #fff8ef;
   --accent: #ff9b5c;
   --accent-strong: #ffb27d;
+  --accent-contrast: #211006;
   --accent-soft: rgba(255, 155, 92, 0.28);
   --surface: rgba(255, 255, 255, 0.055);
   --surface-strong: rgba(255, 255, 255, 0.085);
@@ -294,7 +297,8 @@ a {
 }
 
 .language-switcher button {
-  min-width: 2.15rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
   border: 0;
   border-radius: 999px;
   background: transparent;
@@ -321,7 +325,7 @@ a {
 
 .language-switcher button.is-active {
   background: var(--accent);
-  color: #211006;
+  color: var(--accent-contrast);
 }
 
 .theme-switcher {
@@ -343,7 +347,7 @@ a {
   font-size: 0.75rem;
   font-weight: 900;
   list-style: none;
-  min-height: 2.35rem;
+  min-height: 2.75rem;
   padding: 0.24rem 0.55rem 0.24rem 0.72rem;
   transition:
     background 180ms ease,
@@ -416,6 +420,7 @@ a {
   font: inherit;
   font-size: 0.85rem;
   font-weight: 800;
+  min-height: 2.75rem;
   padding: 0.65rem 0.75rem;
   text-align: left;
   transition:
@@ -435,7 +440,7 @@ a {
 
 .theme-menu button.is-active {
   background: var(--accent);
-  color: #211006;
+  color: var(--accent-contrast);
 }
 
 .theme-switcher summary:focus-visible,
@@ -782,7 +787,7 @@ a {
 
 .back-to-top:hover {
   background: var(--accent);
-  color: #211006;
+  color: var(--accent-contrast);
 }
 
 :root[data-theme="light"] .text-white,

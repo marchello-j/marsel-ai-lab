@@ -9,6 +9,8 @@ A modern portfolio website for Marsel AI Lab, focused on AI automation, Telegram
 - Tailwind CSS
 - App Router
 - SEO metadata
+- EN / RU language switcher
+- Light / Dark / System theme switcher
 - Vercel-ready deployment
 
 ## Local Development
@@ -41,16 +43,24 @@ npm run typecheck
 
 ```text
 app/
+  back-to-top.tsx
   globals.css
+  home-client.tsx
+  icon.svg
   layout.tsx
   page.tsx
 public/
+  og-image.svg
 package.json
 next.config.ts
 tsconfig.json
 postcss.config.mjs
 eslint.config.mjs
 ```
+
+## SEO
+
+Production metadata uses `NEXT_PUBLIC_SITE_URL` when available. Set it in Vercel to the final public domain.
 
 ## Deployment
 
